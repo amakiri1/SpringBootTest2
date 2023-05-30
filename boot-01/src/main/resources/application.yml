@@ -1,0 +1,12 @@
+#spring:
+  #mvc:
+    #static-path-pattern: /res/**
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mytest1?serverTimezone=UTC
+    username: root
+    password: abc123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml

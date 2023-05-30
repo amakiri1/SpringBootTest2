@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Data List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .pagination {
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+
+        .pagination .active {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Data List</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>eid</th>
+            <th>empName</th>
+            <th>hireDate</th>
+            <th>money</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="record : ${page.records}">
+            <td th:text="${record.eid}"></td>
+            <td th:text="${record.empName}"></td>
+            <td th:text="${record.hireDate}"></td>
+            <td th:text="${record.money}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <a th:if="${pageNumber > 1}" th:href="@{/?pageNumber=${pageNumber - 1}&pageSize=${pageSize}}">&lt; Prev</a>
+        <span th:each="page : ${pages}" th:class="${page == pageNumber} ? 'active'">
+            <a th:href="@{/?pageNumber=${page}&pageSize=${pageSize}}" th:text="${page}"></a>
+        </span>
+        <a th:if="${pageNumber < totalPages}" th:href="@{/?pageNumber=${pageNumber + 1}&pageSize=${pageSize}}">Next &gt;</a>
+    </div>
+</div>
+</body>
+</html>
